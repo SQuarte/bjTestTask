@@ -1,0 +1,56 @@
+<span><b>current page is   </b>{{ page + 1}}</span>
+<ngx-datatable
+  class="bootstrap"
+  [rows]="tasks"
+  [columnMode]="'force'"
+  [rowHeight]="'auto'"
+  [headerHeight]="50"
+  [footerHeight]="50"
+  [externalPaging]="true"
+  [externalSorting]="true"
+  [count]="totalTasks"
+  [offset]="page"
+  [limit]="limit"
+  (page)='setPage($event)'
+  (sort)='onSort($event)'>
+
+  <ngx-datatable-column name=""  prop="image_path" [width]="350">
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <img src="{{value}}"/>
+    </ng-template>
+  </ngx-datatable-column>
+
+
+  <ngx-datatable-column name="username" [flexGrow]="1">
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      {{value}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="email" [flexGrow]="1">
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      {{value}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="text" [flexGrow]="3">
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      {{value}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="status" [sortable]="false" [flexGrow]="3">
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      {{value == '10' ? true:false}}
+    </ng-template>
+  </ngx-datatable-column>
+
+
+  <ngx-datatable-column *ngIf="editable" name=""  prop="id" [flexGrow]="3">
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <button (click)="editTask(value)" class="btn">Редактировать запись</button>
+    </ng-template>
+  </ngx-datatable-column>
+
+</ngx-datatable>
+

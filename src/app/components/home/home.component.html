@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <div class="row">
+    <button [routerLink]="['./login']" routerLinkActive="active" class="btn pull-right">Login</button>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <h1 class="text-center">TASK LIST</h1>
+    </div>
+  </div>
+  <div class="row">
+    <bj-tasks-list
+      [tasks]="state.tasks"
+      [totalTasks]="state.totalTasks"
+      [page]="state.page"
+      [limit]="state.limit"
+      [editable]="state.isLogin"
+      (onSearch)="searchTasks($event)"
+      (onEditTask)="editTask($event)"></bj-tasks-list>
+  </div>
+  <div class="row" *ngIf="!state.isLogin">
+    <div class="col-sm-12">
+      <h1 class="text-center">ADD TASK</h1>
+    </div>
+    <div class="col-sm-3">
+      <bj-task-form
+        (onPreview)="previewTask($event)"
+        (onSubmitForm)="addTask($event)"></bj-task-form>
+    </div>
+
+  </div>
+</div>

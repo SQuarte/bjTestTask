@@ -1,0 +1,13 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-offset-3 col-md-6">
+      <form (ngSubmit)="performLogin()" #loginForm="ngForm" class="text-center">
+        Login:<br>
+        <input type="text" name="username"  [(ngModel)]="username"><br>
+        Password:<br>
+        <input type="text" name="password" [(ngModel)]="password"><br>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

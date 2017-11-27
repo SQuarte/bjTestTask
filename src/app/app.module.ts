@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule} from '@angular/http';
 import {
   NgModule,
-  ApplicationRef
+  ApplicationRef, CUSTOM_ELEMENTS_SCHEMA
 } from '@angular/core';
 import {
   removeNgStyles,
@@ -14,23 +14,26 @@ import {
   RouterModule,
   PreloadAllModules
 } from '@angular/router';
+import {APP_RESOLVER_PROVIDERS} from "./app.resolver";
+import {AppState, InternalStateType} from "./app.service";
+import {AppComponent} from "./app.component";
+import {TasksModule} from "./modules/tasks/tasks.module";
+import {ROUTES} from "./app.routes";
+import {ENV_PROVIDERS} from "./environment";
+import {AppStoreModule} from "./store";
+import {EffectsModule} from "@ngrx/effects";
+import {TasksEffects} from "./effects/effects";
+import {HomeComponent} from "./components/home/home.component";
+import {NoContentComponent} from "./components/no-content/no-content.component";
+import {TasksService} from "./services/tasks.service";
+import {BaseHttpService} from "./services/baseHttp.service";
+import {ImageUploadModule} from "angular2-image-upload";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {LoginComponent} from "./components/login/login.component";
 
 /*
  * Platform and Environment providers/directives/pipes
  */
-import { ENV_PROVIDERS } from './environment';
-import { ROUTES } from './app.routes';
-// App is our top level component
-import { AppComponent } from './app.component';
-import { APP_RESOLVER_PROVIDERS } from './app.resolver';
-import { AppState, InternalStateType } from './app.service';
-import { HomeComponent } from './home';
-import { AboutComponent } from './about';
-import { NoContentComponent } from './no-content';
-import { XLargeDirective } from './home/x-large';
-
-import '../styles/styles.scss';
-import '../styles/headings.css';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -48,13 +51,12 @@ type StoreType = {
  * `AppModule` is the main entry point into Angular2's bootstraping process
  */
 @NgModule({
-  bootstrap: [ AppComponent ],
+  bootstrap: [ AppComponent],
   declarations: [
     AppComponent,
-    AboutComponent,
     HomeComponent,
+    LoginComponent,
     NoContentComponent,
-    XLargeDirective
   ],
   /**
    * Import Angular's modules.
@@ -63,15 +65,23 @@ type StoreType = {
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
+    TasksModule,
+    AppStoreModule,
+    NgbModule.forRoot(),
+    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
+    EffectsModule.forRoot([TasksEffects]),
+    ImageUploadModule.forRoot()
   ],
   /**
    * Expose our Services and Providers into Angular's dependency injection.
    */
   providers: [
     ENV_PROVIDERS,
-    APP_PROVIDERS
-  ]
+    APP_PROVIDERS,
+    BaseHttpService,
+    TasksService
+  ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule {
 

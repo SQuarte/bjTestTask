@@ -1,8 +1,5 @@
-html, body{
-  height: 100%;
-  font-family: Arial, Helvetica, sans-serif
-}
-
-a.active {
-  background-color: gray;
-}
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~ng-bootstrap-to-bootstrap-3/dist/ng-bootstrap-to-bootstrap-3.min.css";
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/bootstrap.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';

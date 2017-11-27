@@ -3,12 +3,7 @@
  */
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { decorateModuleRef } from './app/environment';
-
-/**
- * App Module
- * our top level module that holds all of our components
- */
-import { AppModule } from './app';
+import {AppModule} from "./app/app.module";
 
 /**
  * Bootstrap our Angular app with a top level NgModule

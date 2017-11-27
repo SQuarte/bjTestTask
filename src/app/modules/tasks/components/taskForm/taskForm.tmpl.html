@@ -1,0 +1,30 @@
+<form (ngSubmit)="onSubmit(taskForm)" #taskForm="ngForm">
+  <div class="form-group">
+    <label for="userName">Name</label>
+    <input type="text" [(ngModel)]="model.userName" class="form-control" id="userName" name="userName" required>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" [(ngModel)]="model.email" class="form-control" id="email" name="email">
+  </div>
+
+  <div class="form-group">
+    <label for="text">Text</label>
+    <textarea id="text" [(ngModel)]="model.text" style="width: 100%" name="Text"></textarea>
+  </div>
+
+
+  <div class="form-group">
+    <label for="img">Add image</label>
+    <input id="img" accept=".png, .jpg, .jpeg"
+           imageUpload (imageSelected)="proccessImage($event)"
+           [resizeOptions]="resizeOptions"
+           type="file"/>
+  </div>
+
+
+  <button type="submit" class="btn btn-success">Submit</button>
+</form>
+<br>
+<button (click)="previewTask()" class="btn btn-success">Preview task</button>

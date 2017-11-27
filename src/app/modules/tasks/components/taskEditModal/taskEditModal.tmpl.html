@@ -1,0 +1,27 @@
+<div class="modal-header">
+  <h4 class="modal-title">Edit task</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+    <div class="row">
+      <div class="col-md-6">Username</div>
+      <div class="col-md-6">{{task.username}}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">Email</div>
+      <div class="col-md-6">{{task.email}}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">Status</div>
+      <input type="checkbox" [checked]="task.status == 10"   (change)="task.status == 0 ? task.status=10 : task.status=0"/>
+    </div>
+    <div class="row">
+      <div class="col-md-6">Text</div>
+      <textarea [(ngModel)]="task.text"></textarea>
+    </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close(task)">Save</button>
+</div>
